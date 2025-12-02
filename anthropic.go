@@ -74,6 +74,13 @@ func (p *AnthropicProvider) findMatchingMock(request anthropic.MessageNewParams)
 // in the expected message, and that part must be of type OfText. If this constraint
 // is not met, the function will return false.
 func (p *AnthropicProvider) requestsMatch(expected AnthropicRequestMatch, actual anthropic.MessageNewParams) bool {
+	// Check model if specified in expected match
+	if expected.Model != nil {
+		if string(actual.Model) != *expected.Model {
+			return false
+		}
+	}
+
 	// Simple deep equal comparison for now
 	// In the future, we could add more sophisticated matching
 	switch expected.MatchType {

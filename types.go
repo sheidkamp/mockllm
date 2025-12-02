@@ -25,6 +25,7 @@ const (
 type OpenAIRequestMatch struct {
 	MatchType MatchType                              `json:"match_type"`
 	Message   openai.ChatCompletionMessageParamUnion `json:"message"`
+	Model     *string                                 `json:"model,omitempty"`
 }
 
 // OpenAIMock maps an OpenAI request to a response using official SDK types
@@ -37,6 +38,7 @@ type OpenAIMock struct {
 type AnthropicRequestMatch struct {
 	MatchType MatchType              `json:"match_type"`
 	Message   anthropic.MessageParam `json:"message"`
+	Model     *string                 `json:"model,omitempty"`
 }
 
 // AnthropicMock maps an Anthropic request to a response using official SDK types

@@ -60,6 +60,13 @@ func (p *OpenAIProvider) findMatchingMock(request openai.ChatCompletionNewParams
 
 // requestsMatch checks if two requests are equivalent
 func (p *OpenAIProvider) requestsMatch(expected OpenAIRequestMatch, actual openai.ChatCompletionNewParams) bool {
+	// Check model if specified in expected match
+	if expected.Model != nil {
+		if actual.Model != *expected.Model {
+			return false
+		}
+	}
+
 	// Simple deep equal comparison for now
 	// In the future, we could add more sophisticated matching
 	switch expected.MatchType {
